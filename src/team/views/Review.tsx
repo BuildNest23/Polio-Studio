@@ -13,14 +13,6 @@ export function Review({ t, ur, s, send, copy }: P) {
     <>
       <Summary T={T} U={ur ? UR : undefined} L={{ still: t.still, lA: t.lA, lB: t.lB, lC: t.lC, lD: t.lD, lS: t.lS, lO: t.lO, totalVacc: t.totalVacc, mmp: t.mmpRatio, zero: t.zero, locked: t.lockedH }} />
       <HouseTables rows={rows} L={L} showRevisit />
-      {s.school.length > 0 && (
-        <div className="card flat">
-          <div className="listrow"><b>{t.school}</b><span className="small muted">{t.u5} / {t.schoolVac}</span></div>
-          {s.school.map((x, k) => (
-            <div className="listrow" key={k}><span>{x.name || t.lS}</span><b>{x.u5} / {x.vac}</b></div>
-          ))}
-        </div>
-      )}
       <button className="btn primary big block" onClick={send}>{t.send}</button>
       <button className="btn big block" onClick={copy}>{t.copy}</button>
     </>
