@@ -1,0 +1,10 @@
+table.f2a td{min-width:var(--cw,38px);font-size:var(--fs,13.5px)}
+table.f2a td.team{min-width:64px}
+.f2a-actions{flex:none;display:flex;gap:8px;padding-bottom:10px}
+.sectitle{flex:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 2px}
+.review{display:flex;flex-direction:column;gap:10px}
+.up{color:var(--ok)}.down{color:var(--red)}
+
+.topbar .inch{margin-inline-start:auto;display:flex;flex-direction:column;align-items:flex-end;max-width:42%;min-width:0;line-height:1.25}
+.topbar .inch small{font-size:10px;color:var(--mute)}
+.topbar .inch b{font-size:13px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

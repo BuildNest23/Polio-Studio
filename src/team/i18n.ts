@@ -1,0 +1,38 @@
+export const I18N = {
+  en: {
+    entry: 'Entry', missed: 'Missed', review: 'Review', settings: 'Settings',
+    sA: 'Children', sB: 'Vaccinated', stillShort: 'Still missed', still: 'Still missed after revisit',
+    house: 'House', locked: 'Locked', mmp: 'MMP house', total: 'Total children (under 5)', vacc: 'Vaccinated', guest: 'Guest children',
+    saveNext: 'Save & Next', finish: 'Finish here', del: 'Delete house', delAsk: 'Delete this house? It cannot be undone.',
+    outside: 'Children found outside (street, market)', school: 'School / madrasa', addSchool: 'Add school / madrasa', schoolName: 'Name', u5: 'Children under 5', schoolVac: 'Vaccinated', remove: 'Remove',
+    missedWord: 'Missed', foundRevisit: 'Found on revisit', noMissed: 'No missed children in saved houses.',
+    lA: 'Children in houses', lB: 'Vaccinated', lC: 'Found on revisit', lD: 'Outside houses', lS: 'Schools', lO: 'Guest children',
+    totalVacc: 'Total vaccinated', mmpKids: 'MMP children', mmpVacc: 'MMP vaccinated', zero: '0/0 houses', lockedH: 'Locked houses', houses: 'Houses',
+    send: 'Send to Incharge', copy: 'Copy data', copied: 'Data copied. Paste it in WhatsApp.', downloaded: 'File saved. Attach it from Downloads in WhatsApp.',
+    includeAsk: 'House {n} has numbers but is not saved. Include it?', include: 'Include', skip: 'Leave out', cancel: 'Cancel', ok: 'OK', jump: 'Go to house', vaccMax: 'Vaccinated cannot be more than Total. Increase Total first.', mmpRatio: 'MMP (vaccinated / total)', colTotal: 'Total', colVacc: 'Vaccinated', colGuest: 'Guest', sum: 'Sum', mmpShort: 'MMP', lockShort: 'L', housesRange: 'Houses', finishAsk: 'House {n} is showing. Add it to the count, or keep House {p} as the last house?', finishAsk0: 'House {n} is showing. Add it to the count?', finishAdd: 'Add House {n}', finishKeep: 'Keep House {p}', finishNone: 'Leave out', mmpOf: 'MMP vaccinated', lockedOf: 'Locked', vaccFormula: 'B+C+D+S+O', wipe: 'Clear all data on this file', wipeAsk: 'This deletes all houses, schools and numbers entered in this file. Send your data first. Continue?', wipeAsk2: 'Last check: really delete everything?', wipeDone: 'All data cleared.', wipeYes: 'Delete everything', savedWord: 'saved', members: 'Team members', saved: 'Saved houses', lockedNote: 'House is locked. Nothing to count.', schoolEmpty: 'No schools added.', sentTitle: 'Totals',
+    language: 'Language', theme: 'Theme', light: 'Light', dark: 'Dark', team: 'Team', day: 'Day', about: 'Data is saved on this phone automatically. Send often.',
+    covered: 'Covered', prevHouse: 'Previous house', nextHouse: 'Next house', colRevisit: 'Revisit', schoolMax: 'Vaccinated cannot be more than Children under 5. Increase under 5 first.', copyManual: 'Copy data manually', selectAll: 'Select all', close: 'Close', area: 'Area', uc: 'UC',
+  },
+  ur: {
+    entry: 'اندراج', missed: 'رہ گئے', review: 'جائزہ', settings: 'ترتیبات',
+    sA: 'بچے', sB: 'ویکسین شدہ', stillShort: 'رہ گئے', still: 'نظرثانی کے بعد بھی رہ جانے والے',
+    house: 'گھر', locked: 'مقفل', mmp: 'MMP گھر', total: 'کل بچے (5 سال سے کم)', vacc: 'ویکسین شدہ', guest: 'مہمان بچے',
+    saveNext: 'محفوظ کریں اور اگلا', finish: 'یہیں ختم کریں', del: 'گھر حذف کریں', delAsk: 'یہ گھر حذف کریں؟ واپس نہیں ہو سکے گا۔',
+    outside: 'گھروں سے باہر ملنے والے بچے (گلی، بازار)', school: 'اسکول / مدرسہ', addSchool: 'اسکول / مدرسہ شامل کریں', schoolName: 'نام', u5: '5 سال سے کم بچے', schoolVac: 'ویکسین شدہ', remove: 'ہٹائیں',
+    missedWord: 'رہ گئے', foundRevisit: 'دوبارہ دورے میں ملے', noMissed: 'محفوظ گھروں میں کوئی بچہ نہیں رہا۔',
+    lA: 'گھروں میں بچے', lB: 'گھروں میں ویکسین شدہ', lC: 'دوبارہ دورے میں ملے', lD: 'گھروں سے باہر', lS: 'اسکول', lO: 'مہمان بچے',
+    totalVacc: 'کل ویکسین شدہ', mmpKids: 'MMP بچے', mmpVacc: 'MMP ویکسین شدہ', zero: '0/0 گھر', lockedH: 'مقفل گھر', houses: 'گھر',
+    send: 'انچارج کو بھیجیں', copy: 'ڈیٹا کاپی کریں', copied: 'ڈیٹا کاپی ہو گیا۔ واٹس ایپ میں پیسٹ کریں۔', downloaded: 'فائل محفوظ ہو گئی۔ واٹس ایپ میں ڈاؤن لوڈز سے لگائیں۔',
+    includeAsk: 'گھر {n} میں نمبر ہیں مگر محفوظ نہیں۔ شامل کریں؟', include: 'شامل کریں', skip: 'چھوڑ دیں', cancel: 'منسوخ', ok: 'ٹھیک ہے', jump: 'گھر پر جائیں', vaccMax: 'ویکسین شدہ کل سے زیادہ نہیں۔ پہلے کل بڑھائیں۔', mmpRatio: 'MMP (ویکسین شدہ / کل)', colTotal: 'کل', colVacc: 'ویکسین شدہ', colGuest: 'مہمان', sum: 'میزان', mmpShort: 'MMP', lockShort: 'L', housesRange: 'گھر', finishAsk: 'گھر {n} سامنے ہے۔ اسے گنتی میں شامل کریں، یا گھر {p} کو آخری گھر رکھیں؟', finishAsk0: 'گھر {n} سامنے ہے۔ اسے گنتی میں شامل کریں؟', finishAdd: 'گھر {n} شامل کریں', finishKeep: 'گھر {p} رکھیں', finishNone: 'چھوڑ دیں', mmpOf: 'MMP ویکسین شدہ', lockedOf: 'مقفل', vaccFormula: 'B+C+D+S+O', wipe: 'اس فائل کا سارا ڈیٹا صاف کریں', wipeAsk: 'اس سے اس فائل میں درج سب گھر، اسکول اور نمبر حذف ہو جائیں گے۔ پہلے ڈیٹا بھیج دیں۔ جاری رکھیں؟', wipeAsk2: 'آخری تصدیق: واقعی سب کچھ حذف کریں؟', wipeDone: 'سارا ڈیٹا صاف ہو گیا۔', wipeYes: 'سب حذف کریں', savedWord: 'محفوظ', members: 'ٹیم ممبرز', saved: 'محفوظ گھر', lockedNote: 'گھر مقفل ہے۔ گنتی کی ضرورت نہیں۔', schoolEmpty: 'کوئی اسکول شامل نہیں۔', sentTitle: 'کل میزان',
+    language: 'زبان', theme: 'تھیم', light: 'روشن', dark: 'تاریک', team: 'ٹیم', day: 'دن', about: 'ڈیٹا اس فون میں خود بخود محفوظ ہوتا ہے۔ بار بار بھیجیں۔',
+    covered: 'مکمل', prevHouse: 'پچھلا گھر', nextHouse: 'اگلا گھر', colRevisit: 'دوبارہ', schoolMax: 'ویکسین شدہ 5 سال سے کم بچوں سے زیادہ نہیں۔', copyManual: 'ڈیٹا خود کاپی کریں', selectAll: 'سب منتخب کریں', close: 'بند کریں', area: 'علاقہ', uc: 'یونین کونسل',
+  },
+};
+export type Dict = typeof I18N.en;
+
+/** Small Urdu text shown under/next to the main English labels when "اردو" is chosen in Settings. */
+export const UR = {
+  total: 'کل بچے (5 سال سے کم)', vacc: 'ویکسین شدہ', guest: 'مہمان بچے', outside: 'گھروں سے باہر ملنے والے بچے', school: 'اسکول / مدرسہ',
+  house: 'گھر', mmp: 'MMP گھر', locked: 'مقفل', revisit: 'دوبارہ دورے میں ملے',
+  A: 'گھروں میں بچے', B: 'ویکسین شدہ', C: 'دوبارہ ملے', D: 'گھروں سے باہر', S: 'اسکول', O: 'مہمان بچے',
+};
