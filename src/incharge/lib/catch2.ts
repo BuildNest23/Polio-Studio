@@ -16,7 +16,26 @@ export function mapQualifiedRefs(formula: string, rowFn: (row: number) => number
 }
 
 const cloneVal = (v: any) => (v && typeof v === 'object' && !(v instanceof Date) ? { ...v } : v);
-const cloneStyle = (s: any) => { try { return s ? JSON.parse(JSON.stringify(s)) : {}; } catch { return {}; } };
+const styleJson = new WeakMap<object, string>();
+const cloneStyle = (s: any) => {
+  if (!s) return {};
+  try {
+    let j = typeof s === 'object' ? styleJson.get(s) : undefined;
+    if (j === undefined) { j = JSON.stringify(s); if (typeof s === 'object') styleJson.set(s, j); }
+    return JSON.parse(j);
+  } catch { return {}; }
+};
+
+/** Visit only the cells that really exist (fast). Falls back to a plain scan for simple sheet objects. */
+function forEachCell(ws: any, maxRow: number, maxCol: number, fn: (cell: any) => void) {
+  if (typeof ws.eachRow === 'function') {
+    ws.eachRow({ includeEmpty: false }, (row: any) => row.eachCell({ includeEmpty: false }, (cell: any) => fn(cell)));
+    return;
+  }
+  for (let r = 1; r <= maxRow; r++) for (let c = 1; c <= maxCol; c++) fn(ws.getCell(r, c));
+}
+/** Look at a cell without creating it (so empty rows/columns are not filled with new cells). */
+const peek = (ws: any, r: number, c: number) => { const row = ws.getRow(r); return typeof row.findCell === 'function' ? row.findCell(c) : ws.getCell(r, c); };
 
 /** Read teams / catch days from the titles in column A. Returns null if the file does not look like an F2A file. */
 export function detectLayout(sheet: any): { nTeams: number; nCatch: number } | null {
@@ -44,28 +63,19 @@ export function addCatchDay2(wb: any, nTeams: number) {
   const lastRow = Math.max(sheet.rowCount || 0, insertAt);
   const maxC = Math.max(sheet.columnCount || 0, LAST_COL);
 
-  // 1. write shared formulas out one by one (so moving rows cannot break them)
-  const normalize = (ws: any, test?: (f: string) => boolean) => {
-    for (let r = 1; r <= (ws.rowCount || 0); r++) for (let c = 1; c <= Math.max(ws.columnCount || 0, 1); c++) {
-      const cell = ws.getCell(r, c); const f = cell.formula;
-      if (f && (!test || test(String(f)))) cell.value = { formula: String(f), result: cell.result };
-    }
-  };
-  normalize(sheet);
-
-  // 2. rows from the insert point down move by `step`: fix every formula that points there
+  // 1+2. read every formula first (shared formulas included), then write them back one by one with
+  //      rows from the insert point down shifted by `step`. Reading first avoids shifting a formula twice.
   const shift = (row: number) => (row >= insertAt ? row + step : row);
-  for (let r = 1; r <= lastRow; r++) for (let c = 1; c <= maxC; c++) {
-    const cell = sheet.getCell(r, c); const f = cell.formula; if (!f) continue;
-    const nf = mapRefs(String(f), shift);
-    if (nf !== f) cell.value = { formula: nf, result: cell.result };
-  }
+  const todo: [any, string, any][] = [];
+  forEachCell(sheet, lastRow, maxC, (cell) => { const f = cell.formula; if (f) todo.push([cell, String(f), cell.result]); });
+  for (const [cell, f, result] of todo) cell.value = { formula: mapRefs(f, shift), result };
   for (const ws of wb.worksheets) {
     if (ws === sheet) continue;
-    for (let r = 1; r <= (ws.rowCount || 0); r++) for (let c = 1; c <= Math.max(ws.columnCount || 0, 1); c++) {
-      const cell = ws.getCell(r, c); const f = cell.formula; if (!f || !/F2A/.test(String(f))) continue;
-      const nf = mapQualifiedRefs(String(f), shift);
-      if (nf !== f) cell.value = { formula: nf, result: cell.result };
+    const other: [any, string, any][] = [];
+    forEachCell(ws, ws.rowCount || 0, Math.max(ws.columnCount || 0, 1), (cell) => { const f = cell.formula; if (f && /F2A/.test(String(f))) other.push([cell, String(f), cell.result]); });
+    for (const [cell, f, result] of other) {
+      const nf = mapQualifiedRefs(f, shift);
+      if (nf !== f) cell.value = { formula: nf, result };
     }
   }
 
@@ -79,8 +89,10 @@ export function addCatchDay2(wb: any, nTeams: number) {
   // 4. move rows down (bottom first)
   for (let r = lastRow; r >= insertAt; r--) {
     for (let c = 1; c <= maxC; c++) {
-      const src = sheet.getCell(r, c), dst = sheet.getCell(r + step, c);
-      dst.value = cloneVal(src.value); dst.style = cloneStyle(src.style);
+      const src = peek(sheet, r, c), old = peek(sheet, r + step, c);
+      if (!src && !old) continue;
+      const dst = old || sheet.getCell(r + step, c);
+      if (src) { dst.value = cloneVal(src.value); dst.style = cloneStyle(src.style); } else { dst.value = null; dst.style = {}; }
     }
     sheet.getRow(r + step).height = sheet.getRow(r).height;
   }

@@ -644,6 +644,8 @@ export async function addCatchDay2() {
   if (Number(S.params.nCatch) !== 1) { toast('This file does not have exactly 1 catch-up day.', 'info'); return; }
   const ok = await uiConfirm('A second catch-up form will be added after Catch Day 1. Final Report and Next Campaign move down and all formulas are updated. Download a backup first if you want to be safe. Continue?', { title: 'Add Catch Day 2', yesText: 'Add', noText: 'Cancel' });
   if (!ok) return;
+  toast('Adding Catch Day 2… please wait.', 'info');
+  await new Promise((r) => setTimeout(r, 60)); // let the message appear before the heavy work starts
   try {
     addCatchDay2Core(S.workbook, Number(S.params.nTeams));
     applySectionMap(Number(S.params.nTeams), 2);
